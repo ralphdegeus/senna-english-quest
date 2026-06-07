@@ -1,0 +1,5 @@
+# dev / system files — not part of the website
+.claude/
+.DS_Store
+*.zip
+*.command

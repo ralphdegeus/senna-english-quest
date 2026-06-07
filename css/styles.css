@@ -1,0 +1,190 @@
+/* ============================================================
+   Senna's English Quest — styles
+   Calm "gaming" look: dark background, neon purple/blue accents,
+   big friendly buttons, lots of breathing room.
+   ============================================================ */
+
+:root {
+  --bg:        #0f1226;
+  --bg-soft:   #1a1f3d;
+  --card:      #222850;
+  --card-2:    #2b3260;
+  --accent:    #7c5cff;   /* purple */
+  --accent-2:  #28c2ff;   /* cyan */
+  --good:      #34d399;   /* green */
+  --warn:      #fbbf24;   /* amber */
+  --bad:       #f87171;   /* red */
+  --text:      #f2f4ff;
+  --text-dim:  #9aa3c7;
+  --radius:    20px;
+  --shadow:    0 10px 30px rgba(0,0,0,.35);
+  font-size: 18px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background: radial-gradient(1200px 600px at 50% -10%, #2a2170 0%, var(--bg) 55%);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app { max-width: 880px; margin: 0 auto; padding: 18px 18px 60px; }
+
+/* ---------- top bar with stats ---------- */
+.topbar {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--bg-soft);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius);
+  padding: 14px 18px; margin-bottom: 22px;
+  box-shadow: var(--shadow);
+}
+.topbar .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: .3px; }
+.topbar .logo small { display:block; font-size:.7rem; color:var(--text-dim); font-weight:600; letter-spacing:1px; }
+.topbar .spacer { flex: 1; }
+.stat {
+  display:flex; align-items:center; gap:8px;
+  background: var(--card); border-radius: 14px; padding: 8px 14px; font-weight: 700;
+}
+.stat .num { font-size: 1.15rem; }
+.stat.level  { color: var(--accent-2); }
+.stat.streak { color: var(--warn); }
+.stat.coins  { color: var(--good); }
+
+/* level / xp bar */
+.xpwrap { margin: 0 0 26px; }
+.xpbar { height: 14px; background: var(--card); border-radius: 999px; overflow: hidden; }
+.xpbar > span { display:block; height:100%; width:0;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width .6s cubic-bezier(.2,.8,.2,1); }
+.xplabel { font-size:.8rem; color: var(--text-dim); margin-top:6px; }
+
+/* ---------- headings ---------- */
+h1 { font-size: 1.7rem; margin-bottom: 6px; }
+h2 { font-size: 1.3rem; margin-bottom: 14px; }
+.sub { color: var(--text-dim); margin-bottom: 22px; }
+
+/* ---------- buttons ---------- */
+button { font-family: inherit; cursor: pointer; border: none; }
+
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  background: linear-gradient(180deg, var(--accent), #5b3df0);
+  color: #fff; font-size: 1.05rem; font-weight: 800;
+  padding: 16px 22px; border-radius: 16px;
+  box-shadow: 0 6px 0 #3d27b0, var(--shadow);
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+.btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #3d27b0, var(--shadow); }
+.btn.big { font-size: 1.3rem; padding: 22px; width: 100%; }
+.btn.ghost { background: var(--card); box-shadow: 0 6px 0 #161a36, var(--shadow); }
+.btn.ghost:active { box-shadow: 0 2px 0 #161a36; }
+.btn.good { background: linear-gradient(180deg, var(--good), #1fae7e); box-shadow: 0 6px 0 #0f7a57, var(--shadow); }
+.btn.cyan { background: linear-gradient(180deg, var(--accent-2), #1296d6); box-shadow: 0 6px 0 #0a6ea0, var(--shadow); }
+.btn:disabled { opacity:.5; cursor: not-allowed; }
+.btn.small { font-size:.9rem; padding:10px 16px; box-shadow:none; }
+
+/* ---------- tiles (home menu) ---------- */
+.tiles { display:grid; grid-template-columns: repeat(2,1fr); gap:16px; }
+.tile {
+  background: var(--card); border:1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius); padding: 20px; text-align:left;
+  box-shadow: var(--shadow); transition: transform .12s ease, background .12s;
+}
+.tile:hover { transform: translateY(-3px); background: var(--card-2); }
+.tile .ic { font-size: 2.2rem; display:block; margin-bottom:10px; }
+.tile .t  { font-weight:800; font-size:1.1rem; }
+.tile .d  { color: var(--text-dim); font-size:.9rem; margin-top:4px; }
+
+/* ---------- generic card ---------- */
+.card {
+  background: var(--card); border:1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow);
+  margin-bottom: 18px;
+}
+
+/* ---------- flashcard ---------- */
+.flash { text-align:center; padding: 40px 26px; }
+.flash .icon { font-size: 4.5rem; }
+.flash .word { font-size: 2.6rem; font-weight: 900; margin: 14px 0 6px; }
+.flash .nl   { color: var(--accent-2); font-size: 1.2rem; font-weight: 700; min-height: 1.4em; }
+.flash .ex   { color: var(--text); font-size: 1.15rem; margin-top: 18px; }
+.flash .exNl { color: var(--text-dim); font-size: .95rem; margin-top: 6px; min-height: 1.2em; }
+.row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top: 24px; }
+
+/* ---------- speaking practice ---------- */
+.mic-btn {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: linear-gradient(180deg, var(--accent-2), #1296d6);
+  font-size: 3rem; color:#fff; box-shadow: var(--shadow);
+  display:flex; align-items:center; justify-content:center; margin: 10px auto;
+  transition: transform .1s;
+}
+.mic-btn.listening { animation: pulse 1s infinite; background: linear-gradient(180deg, var(--bad), #d23b3b); }
+@keyframes pulse { 0%,100%{ transform: scale(1);} 50%{ transform: scale(1.08);} }
+.heard { color: var(--text-dim); margin-top: 14px; min-height: 1.4em; font-style: italic; }
+.scorebadge { font-size: 1.4rem; font-weight: 900; margin-top: 14px; min-height: 1.5em; }
+.scorebadge.great { color: var(--good); }
+.scorebadge.ok    { color: var(--warn); }
+.scorebadge.retry { color: var(--bad); }
+
+/* ---------- chat ---------- */
+.chat { display:flex; flex-direction:column; gap:14px; }
+.bubble { max-width: 82%; padding: 14px 18px; border-radius: 18px; line-height:1.4; }
+.bubble.bot  { background: var(--card-2); align-self:flex-start; border-bottom-left-radius:4px; }
+.bubble.me   { background: linear-gradient(180deg,var(--accent),#5b3df0); align-self:flex-end; border-bottom-right-radius:4px; }
+.bubble .who { font-size:.7rem; color: var(--text-dim); margin-bottom:4px; font-weight:700; letter-spacing:.5px; }
+.bubble.me .who { color: rgba(255,255,255,.7); }
+.options { display:flex; flex-direction:column; gap:10px; margin-top: 8px; }
+.opt {
+  background: var(--card); border:1px solid rgba(255,255,255,.08); color: var(--text);
+  text-align:left; padding: 14px 16px; border-radius: 14px; font-size:1rem; font-weight:600;
+  display:flex; align-items:center; gap:12px; transition: background .1s;
+}
+.opt:hover { background: var(--card-2); }
+.opt .mini-nl { color: var(--text-dim); font-size:.8rem; font-weight:500; }
+
+/* ---------- quiz ---------- */
+.quiz-q { font-size: 1.8rem; font-weight: 900; text-align:center; margin: 10px 0 24px; }
+.quiz-grid { display:grid; grid-template-columns: repeat(2,1fr); gap:14px; }
+.quiz-opt {
+  background: var(--card); color: var(--text); padding: 22px; border-radius:16px;
+  font-size:1.15rem; font-weight:700; border:2px solid transparent; transition: all .12s;
+}
+.quiz-opt:hover { background: var(--card-2); }
+.quiz-opt.correct { border-color: var(--good); background: rgba(52,211,153,.15); }
+.quiz-opt.wrong   { border-color: var(--bad);  background: rgba(248,113,113,.15); }
+
+/* ---------- Dutch hint pill + helpers ---------- */
+.nl-pill {
+  display:inline-flex; align-items:center; gap:6px;
+  background: var(--card); color: var(--accent-2); font-weight:700; font-size:.85rem;
+  padding:8px 14px; border-radius:999px; border:1px solid rgba(40,194,255,.3);
+}
+.back { color: var(--text-dim); font-weight:700; background:none; font-size:1rem; padding:6px 0; }
+.back:hover { color: var(--text); }
+.center { text-align:center; }
+.hidden { display:none !important; }
+.note { color: var(--text-dim); font-size:.85rem; margin-top:14px; }
+.warnbox { background: rgba(251,191,36,.12); border:1px solid rgba(251,191,36,.3);
+  color: var(--warn); padding:12px 16px; border-radius:14px; font-size:.9rem; margin-bottom:16px; }
+
+/* progress dots inside a session */
+.dots { display:flex; gap:8px; justify-content:center; margin-bottom: 18px; }
+.dots .dot { width:10px; height:10px; border-radius:50%; background: var(--card); }
+.dots .dot.done   { background: var(--good); }
+.dots .dot.active { background: var(--accent-2); transform: scale(1.3); }
+
+/* celebration */
+.celebrate { text-align:center; padding: 40px 20px; }
+.celebrate .big { font-size: 4rem; }
+.celebrate h1 { font-size: 2rem; margin: 10px 0; }
+.reward { font-size: 1.3rem; color: var(--good); font-weight:800; margin: 8px 0 20px; }
+
+@media (max-width: 560px) {
+  :root { font-size: 16px; }
+  .tiles, .quiz-grid { grid-template-columns: 1fr; }
+}
