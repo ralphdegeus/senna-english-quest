@@ -13,7 +13,8 @@ const State = (() => {
     xp: 0, coins: 0, streak: 0,
     lastQuestDate: null,
     learned: {},          // { "win": true, ... }
-    questsDone: 0
+    questsDone: 0,
+    seenWelcome: false    // first-time hello + mic reminder shown?
   });
 
   let s = load();
@@ -46,6 +47,7 @@ const State = (() => {
   return {
     get data(){ return s; }, save, level, levelProgress,
     addXp, addCoins, markLearned, completeQuest, questDoneToday,
+    markWelcomeSeen(){ s.seenWelcome = true; save(); },
     reset(){ s = fresh(); save(); }
   };
 })();
@@ -79,9 +81,36 @@ function topbar() {
 }
 
 /* ============================================================
+   WELCOME — shown once, the very first time Senna opens the app.
+   Tells him the one thing he needs: turn on sound + allow the mic.
+   ============================================================ */
+function Welcome() {
+  setHTML(h`
+    <div class="card celebrate">
+      <div class="big">🎮</div>
+      <h1>Welcome, Senna!</h1>
+      <p class="sub" style="max-width:480px;margin:0 auto 18px">
+        This is your English Quest. Learn words, talk to your buddy <b>Pixel</b>,
+        and win XP every day. 🔥
+      </p>
+      <div class="warnbox" style="text-align:left;max-width:460px;margin:0 auto 22px">
+        🔊 <b>Turn your sound on</b> — Pixel talks out loud.<br>
+        🎤 When the browser asks <b>"Use your microphone?"</b>, click <b>Allow</b>
+        so Pixel can hear you speak.
+      </div>
+      <button class="btn big good" id="go">Let's go! →</button>
+    </div>
+  `);
+  document.getElementById("go").onclick = () => { State.markWelcomeSeen(); Home(); };
+}
+
+/* ============================================================
    HOME SCREEN
    ============================================================ */
 function Home() {
+  // First time ever: a friendly hello + the one thing he needs to know (mic).
+  if (!State.data.seenWelcome) return Welcome();
+
   const done = State.questDoneToday();
   setHTML(h`
     <h1>Hey Senna! 👋</h1>
